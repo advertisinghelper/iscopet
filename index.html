@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>毛好多｜行政小助理招募中</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #F4F1EC;
+      --surface:   #FDFCFA;
+      --red:       #C93030;
+      --red-soft:  #F0E4E4;
+      --red-mid:   #D94F4F;
+      --warm1:     #8C6A5A;
+      --warm2:     #B58A78;
+      --charcoal:  #2B2421;
+      --mid:       #6A5E58;
+      --light:     #A99D97;
+      --border:    #E3DDD8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3.5rem 1.75rem 4rem;
+      position: relative;
+      overflow: hidden;
+      /* warm cream-to-blush gradient, NOT full red */
+      background: linear-gradient(170deg, #FDF8F4 0%, #F5EAE6 45%, #EDD8D0 100%);
+    }
+
+    /* soft decorative blob */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,48,48,0.09) 0%, transparent 70%);
+      top: -60px; right: -80px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(140,106,90,0.1) 0%, transparent 70%);
+      bottom: 40px; left: -50px;
+      pointer-events: none;
+    }
+
+    /* floating paw deco */
+    .paw-deco {
+      position: absolute;
+      font-size: 5rem;
+      opacity: 0.055;
+      user-select: none;
+      pointer-events: none;
+    }
+    .paw-deco.a { top: 12%; left: 4%; transform: rotate(-18deg); font-size: 3.5rem; }
+    .paw-deco.b { bottom: 8%; right: 4%; transform: rotate(22deg); font-size: 4rem; }
+
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      font-weight: 600;
+      color: var(--warm1);
+      text-transform: uppercase;
+      margin-bottom: 1.3rem;
+      animation: fadeD 0.6s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(2rem, 9vw, 3.2rem);
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.5rem;
+      animation: fadeD 0.6s 0.08s ease both;
+    }
+
+    .hero-title .accent {
+      color: var(--red);
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      animation: fadeD 0.6s 0.15s ease both;
+    }
+
+    .hero-desc {
+      font-size: clamp(0.88rem, 3.6vw, 1rem);
+      color: var(--mid);
+      line-height: 1.9;
+      max-width: 300px;
+      margin: 0 auto 2.4rem;
+      animation: fadeD 0.6s 0.22s ease both;
+    }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      max-width: 290px;
+      margin: 0 auto;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.95rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 6px 24px rgba(201,48,48,0.28);
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+      animation: fadeU 0.6s 0.3s ease both;
+    }
+    .cta-btn:hover { background: var(--red-mid); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,48,48,0.35); }
+    .cta-btn:active { transform: scale(0.97); }
+
+    /* ─── DIVIDER ─── */
+    .wave {
+      display: block; width: 100%; overflow: hidden; line-height: 0; margin-bottom: -1px;
+    }
+    .wave svg { display: block; width: 100%; }
+
+    /* ─── CONTENT ─── */
+    .content {
+      background: var(--bg);
+      padding: 0 1.2rem 2.5rem;
+    }
+
+    .sec-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      color: var(--red);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    /* intro card */
+    .intro-card {
+      background: var(--surface);
+      border-radius: 16px;
+      border-left: 3px solid var(--red);
+      padding: 1.5rem 1.35rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+    }
+    .intro-card .lead {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(0.97rem, 4vw, 1.08rem);
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.75;
+      margin-bottom: 0.7rem;
+    }
+    .intro-card p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.85;
+    }
+
+    /* standard card */
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 1.4rem 1.35rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.045);
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .task-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .task-list li {
+      display: flex; align-items: flex-start; gap: 0.55rem;
+      font-size: 0.88rem; color: var(--mid); line-height: 1.65;
+    }
+    .task-list li::before {
+      content: '·';
+      color: var(--red); font-size: 1.4rem; line-height: 1.1; flex-shrink: 0;
+    }
+
+    .hint-pill {
+      margin-top: 0.85rem;
+      background: var(--red-soft);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.83rem;
+      color: var(--red);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* salary card */
+    .salary-card {
+      background: var(--charcoal);
+      border-radius: 16px;
+      padding: 1.5rem 1.35rem;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .salary-card::before {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,48,48,0.2) 0%, transparent 70%);
+      top: -60px; right: -40px;
+      pointer-events: none;
+    }
+    .salary-card .sec-label { color: #C9937A; }
+    .salary-row {
+      display: flex; align-items: baseline; gap: 0.4rem;
+      margin: 0.5rem 0 0.3rem;
+    }
+    .salary-prefix { font-size: 0.82rem; color: #C9937A; font-weight: 600; }
+    .salary-num {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 2.1rem; font-weight: 700;
+      color: #fff; letter-spacing: -0.02em;
+    }
+    .salary-unit { font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+    .salary-sub { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 1rem; }
+
+    .bonus-box {
+      background: rgba(201,48,48,0.15);
+      border: 1px solid rgba(201,48,48,0.3);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+    }
+    .bonus-box strong { color: #FF9A9A; }
+
+    /* benefit pills */
+    .benefit-wrap {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem;
+    }
+    .benefit-chip {
+      background: var(--red-soft);
+      color: var(--red);
+      font-size: 0.8rem; font-weight: 600;
+      padding: 0.32rem 0.85rem;
+      border-radius: 100px;
+    }
+
+    /* weekly bonus */
+    .weekly-card {
+      background: linear-gradient(135deg, var(--red) 0%, #A02020 100%);
+      border-radius: 16px;
+      padding: 1.4rem 1.35rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      position: relative; overflow: hidden;
+      box-shadow: 0 6px 24px rgba(201,48,48,0.25);
+    }
+    .weekly-card::after {
+      content: '✨';
+      position: absolute; font-size: 5rem;
+      right: -0.5rem; bottom: -0.8rem; opacity: 0.12;
+    }
+    .weekly-card .card-head { color: #fff; border-color: rgba(255,255,255,0.2); }
+    .weekly-card p { font-size: 0.88rem; opacity: 0.88; line-height: 1.7; }
+    .weekly-amount {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.6rem; font-weight: 700;
+      margin: 0.3rem 0 0.2rem; color: #FFD0D0;
+    }
+
+    /* logo / photo */
+    .logo-section {
+      text-align: center;
+      padding: 0.5rem 0 0.2rem;
+      margin-bottom: 1rem;
+    }
+    .brand-img {
+      width: 160px; height: 160px;
+      border-radius: 28px;
+      object-fit: cover;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.1);
+      display: block;
+      margin: 0 auto;
+    }
+    .brand-name {
+      margin-top: 0.65rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--light);
+    }
+
+    /* bottom cta */
+    .bottom-section {
+      background: var(--bg);
+      padding: 0.5rem 1.2rem 4rem;
+    }
+    .closing-text {
+      text-align: center;
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(0.93rem, 3.8vw, 1.04rem);
+      color: var(--charcoal);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    .closing-text em {
+      color: var(--red); font-style: normal;
+    }
+    .cta-btn-bottom {
+      display: block;
+      width: 100%;
+      max-width: 290px;
+      margin: 0 auto;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.95rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 6px 24px rgba(201,48,48,0.28);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .cta-btn-bottom:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,48,48,0.35); }
+    .cta-btn-bottom:active { transform: scale(0.97); }
+
+    /* animations */
+    @keyframes fadeD {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeU {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 480px) {
+      .content { padding: 0 2rem 2.5rem; }
+      .bottom-section { padding: 0.5rem 2rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <span class="paw-deco a">🐾</span>
+  <span class="paw-deco b">🐾</span>
+
+  <p class="hero-eyebrow">毛好多 · 職缺招募</p>
+
+  <h1 class="hero-title">行政小助理<br><span class="accent">招募中</span></h1>
+
+  <span class="hero-tag">🐾 NOW HIRING</span>
+
+  <p class="hero-desc">
+    不需要照顧貓狗，也不用面對客人。<br>
+    只要細心有條理，<br>就能在溫暖的寵物環境裡穩定成長。
+  </p>
+
+  <a href="https://lin.ee/tPZd8Gp" class="cta-btn" target="_blank" rel="noopener">
+    馬上了解並應徵 →
+  </a>
+</section>
+
+<!-- wave divider -->
+<div class="wave">
+  <svg viewBox="0 0 375 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,36 L0,16 Q90,0 187,16 T375,16 L375,36 Z" fill="#F4F1EC"/>
+  </svg>
+</div>
+
+<!-- ══ CONTENT ══ -->
+<div class="content">
+
+  <!-- intro -->
+  <div class="intro-card">
+    <p class="lead">🐾 療癒又有成就感的小事</p>
+    <p>生活乏味，也要做點有溫度的事。這份工作讓你在靜靜輸入資料的同時，感受秩序與溫柔的力量。</p>
+  </div>
+
+  <!-- tasks -->
+  <div class="card">
+    <div class="card-head"><span>📋</span> 你可以做的事</div>
+    <ul class="task-list">
+      <li>整理每日進出貨商品資訊</li>
+      <li>更新會員資料與消費紀錄</li>
+      <li>檢查商品庫存、價格與上架狀況</li>
+      <li>發現錯誤資料時回報主管或採購部</li>
+    </ul>
+    <div class="hint-pill">
+      💡 提供完整系統教學，<strong>不需要專業背景</strong>，夠細心有條理就能上手。
+    </div>
+  </div>
+
+  <!-- salary -->
+  <div class="salary-card">
+    <div class="sec-label">💼 薪資與待遇</div>
+    <div class="salary-row">
+      <span class="salary-prefix">時薪 NT</span>
+      <span class="salary-num">300 ～ 380</span>
+      <span class="salary-unit">/ 小時</span>
+    </div>
+    <p class="salary-sub">依工作經驗與技能調整，表現優異者另有年終或績效獎金</p>
+    <div class="bonus-box">
+      勞健保 · 津貼 · 交通補助 · 團體保險<br>
+      完整福利，讓你安心工作
+    </div>
+  </div>
+
+  <!-- weekly bonus -->
+  <div class="weekly-card">
+    <div class="card-head"><span>✨</span> 每週優秀獎勵</div>
+    <p>主管每週推薦三位優秀資料處理員</p>
+    <div class="weekly-amount">NT 3,000 工作獎金</div>
+    <p>獎勵所有表現傑出的夥伴！</p>
+  </div>
+
+  <!-- logo -->
+  <div class="logo-section">
+    <img
+      src="data:image/jpeg;base64,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"
+      alt="毛好多品牌 Logo"
+      class="brand-img"
+    />
+    <p class="brand-name">毛好多 · 讓生活多一份溫柔秩序</p>
+  </div>
+
+</div>
+
+<!-- ══ BOTTOM CTA ══ -->
+<div class="bottom-section">
+  <p class="closing-text">
+    想讓生活節奏中，<br>
+    多一份<em>穩定與秩序的溫柔力量</em>？<br>
+    加入毛好多，從現在開始。🐾
+  </p>
+  <a href="https://lin.ee/tPZd8Gp" class="cta-btn-bottom" target="_blank" rel="noopener">
+    馬上了解並應徵 →
+  </a>
+</div>
+
+</body>
+</html>
